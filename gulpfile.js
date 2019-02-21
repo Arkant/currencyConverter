@@ -35,7 +35,7 @@ gulp.task('serve', ['sass','scripts','html'], function() {
         }
     });
 
-    gulp.watch("./src/*.scss", ['sass']);
+    gulp.watch("./src/*.scss", ['sass']).on('change', browserSync.reload);
     gulp.watch("./*.html", ['html']).on('change', browserSync.reload);
     gulp.watch("./src/components/*.js", ['scripts']).on('change', browserSync.reload);
     gulp.watch("./src/*.js", ['scripts']).on('change', browserSync.reload);
