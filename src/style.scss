@@ -1,7 +1,41 @@
-$primary-color: #BDE4D1;
+$background-color: #BDE4D1;
+$font-color: #505653;
+$border: 2px $font-color solid;
+$radius: 5px;
 
 body {
-  background-color: $primary-color;
+  background-color: $background-color;
   font-size: 22px;
-  color: forestgreen;
+  color: $font-color;
+}
+
+.main-form {
+  background-color: white;
+  margin: 0 auto;
+  border: $border;
+  border-radius: $radius;
+  font-size: 20px;
+  .input-wrapper {
+    margin: 0 auto;
+    margin-bottom: 25px;
+  }
+
+  .form-control {
+    color: $font-color;
+  }
+  .form-check-input {
+    margin-top: 0.76rem;
+  }
+  .form-check {
+    padding: 0;
+  }
+
+  fieldset {
+    margin: 0 auto;
+    margin-bottom: 25px;
+    padding: 0;
+  }
+  .exchange-wrapper {
+    margin :0 30px;
+  }
 }

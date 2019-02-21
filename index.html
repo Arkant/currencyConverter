@@ -10,8 +10,71 @@
   <link rel="stylesheet" href="./dist/css/bootstrap-reboot.css">
   <link rel="stylesheet" href="./dist/css/bootstrap.css">
   <link rel="stylesheet" href="./dist/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js"></script>
+  <script src="./node_modules/bootstrap/js/src/util.js"></script>
+  
 </head>
 <body>
   <h1>Hello!</h1>
+  <form class="w-50 p-3 main-form">
+    <div class="col-11 input-wrapper">
+      <p>You give</p>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <select class="form-control">
+              <option>Default select</option>
+              <option>Default select</option>
+              <option>Default select</option>
+              <option>Default select</option>
+            </select>
+        </div>
+        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      </div>
+      <p>You get</p>
+      <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <select class="form-control">
+                  <option>Default select</option>
+                  <option>Default select</option>
+                  <option>Default select</option>
+                  <option>Default select</option>
+                </select>
+            </div>
+            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      </div>
+    </div>
+    <fieldset class="form-group col-11">
+        <h2 class="col-form-label col-sm-5 pt-0">Сommission</h2>
+        <div class="col-sm-8 d-flex justify-content-sm-around ">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                <label class="form-check-label" for="gridRadios1">
+                  0%
+                </label>
+              </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+            <label class="form-check-label" for="gridRadios1">
+              1%
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+            <label class="form-check-label" for="gridRadios2">
+              3%
+            </label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+              <label class="form-check-label" for="gridRadios2">
+                5%
+              </label>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group row exchange-wrapper">
+      <button type="submit" class="btn w-25 btn-secondary">Exchange</button>
+    </div>
+  </form>
 </body>
 </html>

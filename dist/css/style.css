@@ -1,4 +1,26 @@
 body {
   background-color: #BDE4D1;
   font-size: 22px;
-  color: forestgreen; }
+  color: #505653; }
+
+.main-form {
+  background-color: white;
+  margin: 0 auto;
+  border: 2px #505653 solid;
+  border-radius: 5px;
+  font-size: 20px; }
+  .main-form .input-wrapper {
+    margin: 0 auto;
+    margin-bottom: 25px; }
+  .main-form .form-control {
+    color: #505653; }
+  .main-form .form-check-input {
+    margin-top: 0.76rem; }
+  .main-form .form-check {
+    padding: 0; }
+  .main-form fieldset {
+    margin: 0 auto;
+    margin-bottom: 25px;
+    padding: 0; }
+  .main-form .exchange-wrapper {
+    margin: 0 30px; }
