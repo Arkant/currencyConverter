@@ -1,43 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>  
+<html lang="en" data-ng-app="CurrencyExchanger">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="./dist/app.js"></script>
   <link rel="stylesheet" href="./dist/css/bootstrap-grid.css">
   <link rel="stylesheet" href="./dist/css/bootstrap-reboot.css">
   <link rel="stylesheet" href="./dist/css/bootstrap.css">
   <link rel="stylesheet" href="./dist/css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js"></script>
-  <script src="./node_modules/bootstrap/js/src/util.js"></script>
-  
 </head>
-<body>
-  <h1>Hello!</h1>
+<body data-ng-controller="CurController">
   <form class="w-50 p-3 main-form">
     <div class="col-11 input-wrapper">
       <p>You give</p>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <select class="form-control">
-              <option>Default select</option>
-              <option>Default select</option>
-              <option>Default select</option>
-              <option>Default select</option>
-            </select>
+              <option data-ng-repeat="item in list">{{item.ccy}}</option>
+          </select>
         </div>
         <input type="text" class="form-control" aria-label="Text input with dropdown button">
       </div>
       <p>You get</p>
       <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <select class="form-control">
-                  <option>Default select</option>
-                  <option>Default select</option>
-                  <option>Default select</option>
-                  <option>Default select</option>
+                <select class="form-control">
+                    <option ng-repeat="item in list">{{item.ccy}}</option>
                 </select>
             </div>
             <input type="text" class="form-control" aria-label="Text input with dropdown button">
@@ -76,5 +65,8 @@
       <button type="submit" class="btn w-25 btn-secondary">Exchange</button>
     </div>
   </form>
+  <script src="./node_modules/angular/angular.js"></script>
+  <script src="./dist/app.js"></script>
 </body>
+
 </html>
