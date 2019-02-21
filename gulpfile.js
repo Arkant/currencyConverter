@@ -14,9 +14,12 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('sass', function() {
-    gulp.src("./src/*.scss")
+    gulp.src([
+        "./src/*.scss",
+        "./node_modules/bootstrap/scss/*.scss"
+    ])
     .pipe(sass())
-    .pipe(gulp.dest("./dist"));
+    .pipe(gulp.dest("./dist/css"));
 });
 
 gulp.task('html', function() {
