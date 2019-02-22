@@ -51,4 +51,7 @@ app.controller('CurController', ['$scope', 'service', function($scope, service) 
     }
     return result;
   };
+  $scope.changeValues = () => {
+    [$scope.inCurr, $scope.outCurr] = [$scope.outCurr, $scope.inCurr];
+  };
 }]);
