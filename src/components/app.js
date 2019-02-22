@@ -23,22 +23,49 @@ app.controller('CurController', ['$scope', 'service', function($scope, service) 
   $scope.inCurr = 'EUR';
   $scope.outCurr = 'RUR';
   $scope.commision = 0;
+  $scope.selection = 'Buy';
 
-  $scope.showBuy = function() {
+  $scope.countOnBuy = result => {
+    let res = result;
+    $scope.list.forEach(item => {
+      if (item.ccy === $scope.inCurr) {
+        res = $scope.giveCur * item.buy;
+      }
+    });
+    $scope.list.forEach(item => {
+      if (item.ccy === $scope.outCurr) {
+        res /= item.buy;
+      }
+    });
+    res = $scope.countPercent(res, $scope.commision);
+    return res;
+  };
+
+  $scope.countOnSell = result => {
+    let res = result;
+    $scope.list.forEach(item => {
+      if (item.ccy === $scope.inCurr) {
+        res = $scope.giveCur * item.sale;
+      }
+    });
+    $scope.list.forEach(item => {
+      if (item.ccy === $scope.outCurr) {
+        res /= item.sale;
+      }
+    });
+    res = $scope.countPercent(res, $scope.commision);
+    return res;
+  };
+
+  $scope.showPrice = function() {
     let result = 0;
 
     if ($scope.list !== undefined) {
-      $scope.list.forEach(item => {
-        if (item.ccy === $scope.inCurr) {
-          result = $scope.giveCur * item.buy;
-        }
-      });
-      $scope.list.forEach(item => {
-        if (item.ccy === $scope.outCurr) {
-          result /= item.buy;
-        }
-      });
-      result = $scope.countPercent(result, $scope.commision);
+      if ($scope.selection === 'Buy') {
+        result = $scope.countOnBuy(result);
+      } else {
+        result = $scope.countOnSell(result);
+      }
     }
     return result;
   };
