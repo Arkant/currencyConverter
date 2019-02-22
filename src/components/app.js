@@ -52,4 +52,3 @@ app.controller('CurController', ['$scope', 'service', function($scope, service) 
     return result;
   };
 }]);
-
