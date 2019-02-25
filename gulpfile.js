@@ -6,7 +6,6 @@ var concat = require('gulp-concat');
 gulp.task('scripts', function(){
     gulp.src([
         './node_modules/angular.min.js',
-        './src/app.js',
         './src/components/*.js'
     ])
     .pipe(concat('app.js'))

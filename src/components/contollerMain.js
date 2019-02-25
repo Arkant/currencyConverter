@@ -7,6 +7,7 @@
     $scope.inCurr = 'EUR';
     $scope.outCurr = 'RUR';
     $scope.selection = 'Buy';
+    // $scope.actions = [];
 
     $scope.convert = result => {
       let res = result;
