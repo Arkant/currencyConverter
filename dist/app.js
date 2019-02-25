@@ -12,33 +12,30 @@
     $scope.outCurr = 'RUR';
     $scope.selection = 'Buy';
 
-    $scope.countOnBuy = result => {
-      let res = result;
-      $scope.list.forEach(item => {
-        if (item.ccy === $scope.inCurr) {
-          res = $scope.giveCur * item.buy;
-        }
-
-        if (item.ccy === $scope.outCurr) {
-          res /= item.buy;
-        }
-      });
-      res = $scope.countPercent(res, $scope.commision);
-      return res;
-    };
-
-    $scope.countOnSell = result => {
+    $scope.convert = result => {
       let res = result;
 
-      $scope.list.forEach(item => {
-        if (item.ccy === $scope.inCurr) {
-          res = $scope.giveCur * item.sale;
-        }
+      if ($scope.selection === 'Buy') {
+        $scope.list.forEach(item => {
+          if (item.ccy === $scope.inCurr) {
+            res = $scope.giveCur * item.buy;
+          }
 
-        if (item.ccy === $scope.outCurr) {
-          res /= item.sale;
-        }
-      });
+          if (item.ccy === $scope.outCurr) {
+            res /= item.buy;
+          }
+        });
+      } else {
+        $scope.list.forEach(item => {
+          if (item.ccy === $scope.inCurr) {
+            res = $scope.giveCur * item.sale;
+          }
+
+          if (item.ccy === $scope.outCurr) {
+            res /= item.sale;
+          }
+        });
+      }
       res = $scope.countPercent(res, $scope.commision);
       return res;
     };
@@ -47,11 +44,7 @@
       let result = 0;
 
       if ($scope.list !== undefined) {
-        if ($scope.selection === 'Buy') {
-          result = $scope.countOnBuy(result);
-        } else {
-          result = $scope.countOnSell(result);
-        }
+        result = $scope.convert(result);
       }
       return result;
     };
