@@ -3,9 +3,9 @@
     $scope.list = service.getCurrencies();
     /* default values */
     $scope.giveCur = 0;
+    $scope.commision = 0;
     $scope.inCurr = 'EUR';
     $scope.outCurr = 'RUR';
-    $scope.commision = 0;
     $scope.selection = 'Buy';
 
     $scope.countOnBuy = result => {
@@ -14,8 +14,7 @@
         if (item.ccy === $scope.inCurr) {
           res = $scope.giveCur * item.buy;
         }
-      });
-      $scope.list.forEach(item => {
+
         if (item.ccy === $scope.outCurr) {
           res /= item.buy;
         }
@@ -26,12 +25,12 @@
 
     $scope.countOnSell = result => {
       let res = result;
+
       $scope.list.forEach(item => {
         if (item.ccy === $scope.inCurr) {
           res = $scope.giveCur * item.sale;
         }
-      });
-      $scope.list.forEach(item => {
+
         if (item.ccy === $scope.outCurr) {
           res /= item.sale;
         }
@@ -52,7 +51,6 @@
       }
       return result;
     };
-
     $scope.countPercent = (result, commision) => {
       if (commision !== 0) {
         const res = result / 100 * commision;
