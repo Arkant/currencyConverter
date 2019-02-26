@@ -6,6 +6,7 @@
   window.app.controller('CurController', ['$scope', 'currencyService', 'fees', 'actions', 'curNames',
     function($scope, currencyService, fees, actions, curNames) {
       $scope.list = currencyService.getCurrencies();
+      console.log($scope.list);
       $scope.giveCur;
       $scope.fees = fees;
       $scope.chosenFee;
@@ -18,7 +19,7 @@
 
         if ($scope.list !== undefined) {
           result = currencyService.convert($scope.result, $scope.selection, $scope.giveCur,
-            $scope.outCurr, $scope.inCurr, $scope.list, $scope.chosenFee);
+            $scope.outCurr.ccy, $scope.inCurr.ccy, $scope.list, $scope.chosenFee);
         }
         return result;
       };
@@ -27,6 +28,15 @@
         [$scope.inCurr, $scope.outCurr] = [$scope.outCurr, $scope.inCurr];
       };
     }]);
+}());
+(function() {
+  window.app.filter('currencyFilter', function() {
+    return function(array, expression, comparator) {
+      return array.filter(function(item) {
+        return !expression || !window.angular.equals(item, expression);
+      });
+    };
+  });
 }());
 /* eslint-disable no-console */
 /* global angular */

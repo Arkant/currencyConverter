@@ -14,7 +14,7 @@
 
         if ($scope.list !== undefined) {
           result = currencyService.convert($scope.result, $scope.selection, $scope.giveCur,
-            $scope.outCurr, $scope.inCurr, $scope.list, $scope.chosenFee);
+            $scope.outCurr.ccy, $scope.inCurr.ccy, $scope.list, $scope.chosenFee);
         }
         return result;
       };

@@ -16,9 +16,8 @@
       <p>You give</p>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <select ng-model="inCurr" class="form-control">
-              <option data-ng-repeat="item in list">{{item.ccy}}</option>
-          </select>
+          <select class="form-control" ng-model="inCurr" ng-options='item.ccy for item in list | currencyFilter: outCurr'>
+            </select>
         </div>
         <input ng-model="giveCur" type="number" min="0" class="form-control">
       </div>
@@ -26,9 +25,8 @@
       <p>You get</p>
       <div class="input-group mb-3">
           <div class="input-group-prepend">
-              <select ng-model="outCurr" class="form-control">
-                  <option data-ng-repeat="item in list">{{item.ccy}}</option>
-              </select>
+            <select class="form-control" ng-model="outCurr" ng-options='item.ccy for item in list | currencyFilter: inCurr'>
+            </select>
           </div>
           <input ng-model="showPrice()" type="text" class="form-control">
       </div>
