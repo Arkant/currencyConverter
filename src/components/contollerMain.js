@@ -17,7 +17,9 @@
           if (item.ccy === $scope.inCurr) {
             res = $scope.giveCur * item.buy;
           }
+        });
 
+        $scope.list.forEach(item => {
           if (item.ccy === $scope.outCurr) {
             res /= item.buy;
           }
@@ -27,14 +29,14 @@
           if (item.ccy === $scope.inCurr) {
             res = $scope.giveCur * item.sale;
           }
-
+        });
+        $scope.list.forEach(item => {
           if (item.ccy === $scope.outCurr) {
             res /= item.sale;
           }
         });
       }
       res = $scope.countPercent(res, $scope.chosenFee);
-      console.log(res);
       return res;
     };
 
@@ -47,9 +49,6 @@
       return result;
     };
     $scope.countPercent = (result, chosenFee) => {
-      console.log(chosenFee, 'Chosen fees');
-      console.log(result, 'Chosen result');
-
       if (chosenFee !== 0) {
         const res = result / 100 * chosenFee;
 
