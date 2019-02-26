@@ -3,74 +3,39 @@
   window.app = angular.module('CurrencyExchanger', []);
 }());
 (function() {
-  window.app.controller('CurController', ['$scope', 'service', 'fees', function($scope, service, fees) {
-    $scope.list = service.getCurrencies();
-    /* default values */
-    $scope.giveCur = 0;
-    $scope.fees = fees;
-    $scope.inCurr = 'EUR';
-    $scope.outCurr = 'RUR';
-    $scope.selection = 'Buy';
-    $scope.chosenFee;
+  window.app.controller('CurController', ['$scope', 'currencyService', 'fees', 'actions', 'curNames',
+    function($scope, currencyService, fees, actions, curNames) {
+      $scope.list = currencyService.getCurrencies();
+      $scope.giveCur;
+      $scope.fees = fees;
+      $scope.chosenFee;
+      $scope.inCurr = curNames[0];
+      $scope.outCurr = curNames[1];
+      $scope.selection = actions[0];
 
-    $scope.convert = result => {
-      let res = result;
+      $scope.showPrice = function() {
+        let result = 0;
 
-      if ($scope.selection === 'Buy') {
-        $scope.list.forEach(item => {
-          if (item.ccy === $scope.inCurr) {
-            res = $scope.giveCur * item.buy;
-          }
-        });
+        if ($scope.list !== undefined) {
+          result = currencyService.convert($scope.result, $scope.selection, $scope.giveCur,
+            $scope.outCurr, $scope.inCurr, $scope.list, $scope.chosenFee);
+        }
+        return result;
+      };
 
-        $scope.list.forEach(item => {
-          if (item.ccy === $scope.outCurr) {
-            res /= item.buy;
-          }
-        });
-      } else {
-        $scope.list.forEach(item => {
-          if (item.ccy === $scope.inCurr) {
-            res = $scope.giveCur * item.sale;
-          }
-        });
-        $scope.list.forEach(item => {
-          if (item.ccy === $scope.outCurr) {
-            res /= item.sale;
-          }
-        });
-      }
-      res = $scope.countPercent(res, $scope.chosenFee);
-      return res;
-    };
-
-    $scope.showPrice = function() {
-      let result = 0;
-
-      if ($scope.list !== undefined) {
-        result = $scope.convert(result);
-      }
-      return result;
-    };
-    $scope.countPercent = (result, chosenFee) => {
-      if (chosenFee !== 0) {
-        const res = result / 100 * chosenFee;
-
-        return result - res;
-      }
-      return result;
-    };
-    $scope.swapValues = () => {
-      [$scope.inCurr, $scope.outCurr] = [$scope.outCurr, $scope.inCurr];
-    };
-  }]);
+      $scope.swapValues = () => {
+        [$scope.inCurr, $scope.outCurr] = [$scope.outCurr, $scope.inCurr];
+      };
+    }]);
 }());
 /* eslint-disable no-console */
 /* global angular */
 (function() {
   window.app.constant('fees', [0, 1, 3, 5]);
+  window.app.constant('actions', ['Buy', 'Sell']);
+  window.app.constant('curNames', ['USD', 'EUR', 'RUB', 'BTC']);
 
-  window.app.service('service', ['$http', function($http) {
+  window.app.service('currencyService', ['$http', function($http) {
     this.currencies = [];
 
     this.getCurrencies = () => {
@@ -81,6 +46,46 @@
         angular.copy(data, this.currencies);
       }, err => { console.log(err); });
       return this.currencies;
+    };
+
+    this.convert = (result, selection, giveCur, outCurr, inCurr, list, chosenFee) => {
+      let res = result;
+
+      if (selection === 'Buy') {
+        list.forEach(item => {
+          if (item.ccy === inCurr) {
+            res = giveCur * item.buy;
+          }
+        });
+
+        list.forEach(item => {
+          if (item.ccy === outCurr) {
+            res /= item.buy;
+          }
+        });
+      } else {
+        list.forEach(item => {
+          if (item.ccy === inCurr) {
+            res = giveCur * item.sale;
+          }
+        });
+        list.forEach(item => {
+          if (item.ccy === outCurr) {
+            res /= item.sale;
+          }
+        });
+      }
+      res = this.countPercent(res, chosenFee);
+      return res;
+    };
+
+    this.countPercent = (result, chosenFee) => {
+      if (chosenFee !== 0) {
+        const res = result / 100 * chosenFee;
+
+        return result - res;
+      }
+      return result;
     };
   }]);
 }());
