@@ -36,33 +36,15 @@
     <fieldset class="form-group col-11">
         <h2 class="col-form-label col-sm-5 pt-0">Сommission</h2>
         <div class="col-sm-8 d-flex justify-content-sm-around check-wrapper">
-            <div class="form-check">
-                <input ng-model="commision" class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="0" checked>
-                <label class="form-check-label" for="gridRadios1">
-                  0%
-                </label>
-              </div>
-          <div class="form-check">
-            <input ng-model="commision" class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="1" checked>
-            <label class="form-check-label" for="gridRadios2">
-              1%
+          <div data-ng-repeat="fee in fees" class="form-check">
+            <input ng-model="$parent.chosenFee" class="form-check-input" type="radio" ng-value="fee" name="gridRadios">
+            <label class="form-check-label" for="gridRadios1">
+              {{fee}}%
             </label>
           </div>
-          <div class="form-check">
-            <input ng-model="commision" class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="3">
-            <label class="form-check-label" for="gridRadios3">
-              3%
-            </label>
-          </div>
-          <div class="form-check">
-              <input ng-model="commision" class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="5">
-              <label class="form-check-label" for="gridRadios4">
-                5%
-              </label>
-            </div>
         </div>
         <select ng-model="selection" class="form-control" id="exampleFormControlSelect1">
-            <option >Buy</option>
+            <option>Buy</option>
             <option>Sell</option>
         </select>
     </fieldset>

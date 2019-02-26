@@ -1,13 +1,13 @@
 (function() {
-  window.app.controller('CurController', ['$scope', 'service', function($scope, service) {
+  window.app.controller('CurController', ['$scope', 'service', 'fees', function($scope, service, fees) {
     $scope.list = service.getCurrencies();
     /* default values */
     $scope.giveCur = 0;
-    $scope.commision = 0;
+    $scope.fees = fees;
     $scope.inCurr = 'EUR';
     $scope.outCurr = 'RUR';
     $scope.selection = 'Buy';
-    // $scope.actions = [];
+    $scope.chosenFee;
 
     $scope.convert = result => {
       let res = result;
@@ -33,7 +33,8 @@
           }
         });
       }
-      res = $scope.countPercent(res, $scope.commision);
+      res = $scope.countPercent(res, $scope.chosenFee);
+      console.log(res);
       return res;
     };
 
@@ -45,9 +46,12 @@
       }
       return result;
     };
-    $scope.countPercent = (result, commision) => {
-      if (commision !== 0) {
-        const res = result / 100 * commision;
+    $scope.countPercent = (result, chosenFee) => {
+      console.log(chosenFee, 'Chosen fees');
+      console.log(result, 'Chosen result');
+
+      if (chosenFee !== 0) {
+        const res = result / 100 * chosenFee;
 
         return result - res;
       }

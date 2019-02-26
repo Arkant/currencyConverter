@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 /* global angular */
 (function() {
+  window.app.constant('fees', [0, 1, 3, 5]);
+
   window.app.service('service', ['$http', function($http) {
     this.currencies = [];
 
