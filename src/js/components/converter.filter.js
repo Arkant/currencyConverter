@@ -1,3 +1,4 @@
+/* global app angular*/
 (function() {
   window.app.filter('currencyFilter', function() {
     return function(array, expression, comparator) {

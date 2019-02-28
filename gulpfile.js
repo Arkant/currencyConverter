@@ -1,43 +1,96 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass = require('gulp-sass');
-var concat = require('gulp-concat');
+/* eslint-disable no-undef */
+'use strict';
 
-gulp.task('scripts', function(){
-    gulp.src([
-        './node_modules/angular.min.js',
-        './src/*.js',
-        './src/app/**/*.js'
-    ])
-    .pipe(concat('index.js'))
-    .pipe(gulp.dest('./dist'))
-});
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const browserSync = require('browser-sync').create();
+const concat = require('gulp-concat');
+const htmlreplace = require('gulp-html-replace');
 
-gulp.task('sass', function() {
-    gulp.src([
-        "./src/styles/*.scss",
-        "./node_modules/bootstrap/scss/*.scss"
-    ])
-    .pipe(sass())
-    .pipe(gulp.dest("./dist/css"));
+
+const path = {
+  build: {
+    html: 'build/',
+    js: 'build/js/',
+    css: 'build/css/'
+  },
+  src: {
+    html: 'src/index.html',
+    js: 'src/js/**/*.js',
+    style: 'src/styles/main.scss'
+  }
+};
+
+gulp.task('index', function() {
+  gulp.src(path.src.html)
+    .pipe(htmlreplace({
+      'css': 'css/main.css',
+      'js': 'js/index.js'
+    }))
+    .pipe(gulp.dest(path.build.html));
 });
 
 gulp.task('html', function() {
-    gulp.src("./*.html")
-    .pipe(gulp.dest("./dist"));
+  gulp.src('src/js/components/templates/converter.html')
+    .pipe(gulp.dest(path.build.html));
 });
 
-gulp.task('serve', ['sass','scripts','html'], function() {
-
-    browserSync.init({
-        server: {
-            baseDir: "./"
-        }
-    });
-
-    gulp.watch("./src/styles/*.scss", ['sass']).on('change', browserSync.reload);
-    gulp.watch("./*.html", ['html']).on('change', browserSync.reload);
-    gulp.watch("./src/app/*.js", ['scripts']).on('change', browserSync.reload);
+gulp.task('script', function() {
+  return gulp.src([
+    'src/js/index.js',
+    'src/js/components/converter.js',
+    'src/js/components/converter.service.js',
+    'src/js/components/converter.controller.js',
+    'src/js/components/converter.filter.js',
+    'src/js/directives/internetCheck.directive.js'
+  ])
+    .pipe(concat('index.js'))
+    .pipe(gulp.dest(path.build.js));
 });
 
-gulp.task('default', ['serve']);
+gulp.task('script:build', function() {
+  return gulp.src([
+    'src/js/index.js',
+    'src/js/components/converter.js',
+    'src/js/components/converter.service.js',
+    'src/js/components/converter.controller.js',
+    'src/js/components/converter.filter.js',
+    'src/js/directives/internetCheck.directive.js'
+  ])
+    .pipe(concat('index.js'))
+    .pipe(gulp.dest(path.build.js));
+});
+
+gulp.task('style', function() {
+  gulp.src(path.src.style)
+    .pipe(sass())
+    .pipe(gulp.dest(path.build.css));
+});
+
+gulp.task('style:build', function() {
+  gulp.src(path.src.style)
+    .pipe(sass())
+    .pipe(gulp.dest(path.build.css));
+});
+
+
+gulp.task('server', ['index', 'html', 'script', 'style'], function(done) {
+  browserSync.init({
+    server: {
+      baseDir: './build/'
+    },
+    host: 'localhost',
+    files: [path.build.html, path.build.js, path.build.css]
+  });
+  done();
+});
+
+gulp.task('watch', function() {
+  gulp.watch(path.src.html, ['index']).on('change', browserSync.reload);
+  gulp.watch(path.src.html, ['html']).on('change', browserSync.reload);
+  gulp.watch(path.src.style, ['style']).on('change', browserSync.reload);
+  gulp.watch(path.src.js, ['script']).on('change', browserSync.reload);
+});
+
+gulp.task('default', ['watch', 'server']);
+gulp.task('build', ['index', 'html', 'script:build', 'style:build']);

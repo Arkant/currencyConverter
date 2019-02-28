@@ -1,3 +1,4 @@
+/* global app */
 (function() {
   window.app.controller('CurController', ['$scope', 'currencyService', 'fees', 'actions', 'curNames',
     function($scope, currencyService, fees, actions, curNames) {
@@ -8,7 +9,6 @@
       $scope.inCurr = curNames[0];
       $scope.outCurr = curNames[1];
       $scope.selection = actions[0];
-
       $scope.showPrice = function() {
         let result = 0;
 
