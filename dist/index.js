@@ -6,7 +6,6 @@
   window.app.controller('CurController', ['$scope', 'currencyService', 'fees', 'actions', 'curNames',
     function($scope, currencyService, fees, actions, curNames) {
       $scope.list = currencyService.getCurrencies();
-      console.log($scope.list);
       $scope.giveCur;
       $scope.fees = fees;
       $scope.chosenFee;

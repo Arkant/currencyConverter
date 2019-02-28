@@ -6,15 +6,16 @@ var concat = require('gulp-concat');
 gulp.task('scripts', function(){
     gulp.src([
         './node_modules/angular.min.js',
-        './src/components/*.js'
+        './src/*.js',
+        './src/app/**/*.js'
     ])
-    .pipe(concat('app.js'))
+    .pipe(concat('index.js'))
     .pipe(gulp.dest('./dist'))
 });
 
 gulp.task('sass', function() {
     gulp.src([
-        "./src/*.scss",
+        "./src/styles/*.scss",
         "./node_modules/bootstrap/scss/*.scss"
     ])
     .pipe(sass())
@@ -34,9 +35,9 @@ gulp.task('serve', ['sass','scripts','html'], function() {
         }
     });
 
-    gulp.watch("./src/*.scss", ['sass']).on('change', browserSync.reload);
+    gulp.watch("./src/styles/*.scss", ['sass']).on('change', browserSync.reload);
     gulp.watch("./*.html", ['html']).on('change', browserSync.reload);
-    gulp.watch("./src/components/*.js", ['scripts']).on('change', browserSync.reload);
+    gulp.watch("./src/app/*.js", ['scripts']).on('change', browserSync.reload);
 });
 
 gulp.task('default', ['serve']);
