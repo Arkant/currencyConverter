@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/main.css">
+  
+  <title>Currency Exchanger</title>
+</head>
+
+<body>
+  <div class="container" ng-app='CurrencyExchanger'>
+    <converter></converter>
+    <div class="cheker-connection" internet-check ng-hide='netActive'>
+        <div class="neon">OFFLINE </div>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js"></script>
+<script defer src="./js/index.js"></script>
+</body>
+
+</html>

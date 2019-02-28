@@ -52,6 +52,7 @@ module.exports = {
     'no-multi-spaces': 'error',
     'no-multi-str': 'error',
     'no-new': 'error',
+    'no-new-func': 'error',
     'no-new-wrappers': 'error',
     'no-octal-escape': 'error',
     'no-param-reassign': 'error',
