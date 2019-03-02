@@ -1,6 +1,6 @@
 /* global app, angular */
 (function() {
-  const app = angular.module('CurrencyExchanger', []);
+  const app = angular.module('CurrencyExchanger', ['ui.router']);
   app.config(['currencyServiceProvider', function(currencyServiceProvider) {
     currencyServiceProvider.setAPI('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11');
   }]);
