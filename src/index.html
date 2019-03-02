@@ -13,12 +13,16 @@
 
 <body>
   <div class="container" ng-app='CurrencyExchanger'>
-    <converter></converter>
     <div class="cheker-connection" internet-check ng-hide='netActive'>
         <div class="neon">OFFLINE </div>
     </div>
+    <a ui-sref="home" ui-sref-active="active">Home</a>
+    <a ui-sref="converter" ui-sref-active="active">Converter</a>
+
+    <ui-view></ui-view>
   </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js"></script>
+<script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
 <script defer src="./js/index.js"></script>
 </body>
 

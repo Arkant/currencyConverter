@@ -38,11 +38,9 @@ gulp.task('html', function() {
 gulp.task('script', function() {
   return gulp.src([
     'src/js/index.js',
-    'src/js/components/converter.js',
-    'src/js/components/converter.service.js',
-    'src/js/components/converter.controller.js',
-    'src/js/components/converter.filter.js',
-    'src/js/directives/internetCheck.directive.js'
+    'src/js/components/*.js',
+    'src/js/routing/*.js',
+    'src/js/directives/*.js'
   ])
     .pipe(concat('index.js'))
     .pipe(gulp.dest(path.build.js));
