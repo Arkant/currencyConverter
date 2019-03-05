@@ -12,7 +12,7 @@ import mainModule from './pages/main/main.module';
 
 
 const App = angular.module(
-  "miniApp", [
+  "myApp", [
     // plugins
     uiRouter,
     "ngMessages", 

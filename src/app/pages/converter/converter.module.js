@@ -1,15 +1,16 @@
-import './main.scss';
+'use strict';
 
-import CurController from './converter.controller.js';
+import './converter.scss';
+import converterController from './converter.controller.js';
 
-const app = angular.module('CurrencyExchanger', []);
+const converterModule = angular.module('currency-exchanger', []);
 
-app.controller('CurController', CurController);
+converterModule.controller('converterController', converterController);
 
-
-app.config(function (currencyServiceProvider) {
+converterModule.config(function(currencyServiceProvider) {
   'ngInject';
-  currencyServiceProvider.setURL('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11');
+  currencyServiceProvider.setAPI('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=11');
 });
 
-export default app;
+
+export default converterModule;

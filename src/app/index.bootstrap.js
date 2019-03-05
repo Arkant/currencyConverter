@@ -12,7 +12,7 @@ import "./index.module";
 import "../assets/styles/sass/index.scss";
 
 angular.element(document).ready(() => {
-  angular.bootstrap(document, ['miniApp'], {
+  angular.bootstrap(document, ['myApp'], {
     strictDi: true
   });
 });

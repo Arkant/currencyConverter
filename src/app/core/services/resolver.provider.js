@@ -5,11 +5,12 @@ export default function (app) {
 
     function resolverProvider () {
         this.asyncPagePrealoading = asyncPagePrealoading;
+        this.converterPagePrealoading = converterPagePrealoading;
         this.$get = function() { return this; };
     }
 
     
-    function asyncPagePrealoading ($q, $ocLazyLoad) {
+        function asyncPagePrealoading ($q, $ocLazyLoad) {
             "ngInject";
 
             const deferred = $q.defer();
@@ -21,7 +22,20 @@ export default function (app) {
                 deferred.resolve(asyncModule.default.controller);
             });
             return deferred.promise;
-    }
-    
+        }
+
+        function converterPagePrealoading ($q, $ocLazyLoad) {
+            "ngInject";
+
+            const deferred = $q.defer();
+            require.ensure([], require => {
+                const converterModule = require('../../pages/converter/converter.module');
+                $ocLazyLoad.load({
+                    name: converterModule.default.name,
+                });
+                deferred.resolve(converterModule.default.controller);
+            });
+            return deferred.promise;
+        }
 
 }

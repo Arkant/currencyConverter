@@ -7,28 +7,15 @@ import validationTestDirective from './directives/validation-test/validation-tes
 import constants from './services/constants';
 import storeFactory from './services/store.factory';
 import resolverProvider from './services/resolver.provider';
-import currencyService from './services/converter.provider';
-import currencyFilter from './filters/converterFilter/currency.filter';
+import currencyServiceProvider from './services/converter.provider';
+import currencyFilter from './filters/currency.filter';
 
 validationTestDirective(shared);
 
 constants(shared);
 storeFactory(shared);
 resolverProvider(shared);
-currencyService(shared);
+currencyServiceProvider(shared);
 currencyFilter(shared);
+
 export default shared;
-
-// function converterPagePrealoading ($q, $ocLazyLoad) {
-//   "ngInject";
-
-//   const deferred = $q.defer();
-//   require.ensure([], require => {
-//       const asyncModule = require('../../pages/converter/converter.module');
-//       $ocLazyLoad.load({
-//           name: asyncModule.default.name,
-//       });
-//       deferred.resolve(asyncModule.default.controller);
-//   });
-//   return deferred.promise;
-// }

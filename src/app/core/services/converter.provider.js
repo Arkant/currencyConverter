@@ -1,15 +1,13 @@
-/* eslint-disable no-console */
-
 export default function (app) {
   app.provider('currencyService', currencyService);
 
   function currencyService() {
-
     let API = '';
-    this.setAPI = apiURL => API = apiURL;
-    this.currencies = [];
 
-     this.$get = ['$http', function($http) {
+    return {
+      setAPI: apiURL => (API = apiURL),
+      currencies: [],
+      $get: ['$http', function($http) {
         return {
           getCurrencies: () => {
             $http({
@@ -17,6 +15,7 @@ export default function (app) {
               url: API
             }).then(({ data }) => {
               angular.copy(data, this.currencies);
+            // eslint-disable-next-line no-console
             }, err => { console.log(err); });
             return this.currencies;
           },
@@ -62,5 +61,6 @@ export default function (app) {
           }
         };
       }]
+    };
   }
 }
